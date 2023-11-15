@@ -26,7 +26,24 @@ public class JwtService {
          return Keys.hmacShaKeyFor(byteKey);
 
      }
+    public String generateTokens(UserDetails userDetails)
+    {
+        return generateToken(new HashMap<>(),userDetails);
+    }
 
+    public String generateToken(
+            Map<String,Object> extraClaims,
+            UserDetails userDetails
+    )
+    {
+        return Jwts.builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
 
 
 
