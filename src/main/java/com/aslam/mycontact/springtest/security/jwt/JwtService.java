@@ -46,6 +46,16 @@ public class JwtService {
     }
 
 
+    public String extractUserName(String jwt)
+    {
+        return extractClaim(jwt,Claims::getSubject);
+    }
+
+    private Date extractExpiration(String jwt)
+    {
+        return  extractClaim(jwt,Claims::getExpiration);
+    }
+
     public Claims extractAllClaims(String jwt)
     {
         return Jwts.parserBuilder()
