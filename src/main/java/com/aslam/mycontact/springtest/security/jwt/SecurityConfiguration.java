@@ -1,8 +1,9 @@
 package com.aslam.mycontact.springtest.security.jwt;
 
-import com.mysql.cj.protocol.AuthenticationProvider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,19 +22,14 @@ public class SecurityConfiguration {
 
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers()
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+
+        http.authorizeHttpRequests((auth)->
+                auth.requestMatchers("").permitAll()
+                        .requestMatchers("").authenticated())
+                .sessionManagement((session)->session
+                                             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilter(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilter(jwtAuthFilter);
 
       return http.build();
     }
