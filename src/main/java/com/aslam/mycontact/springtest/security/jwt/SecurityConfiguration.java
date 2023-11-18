@@ -24,12 +24,12 @@ public class SecurityConfiguration {
 
 
         http.authorizeHttpRequests((auth)->
-                auth.requestMatchers("").permitAll()
-                        .requestMatchers("").authenticated())
+                        auth.requestMatchers("").permitAll()
+                            .requestMatchers("").authenticated())
                 .sessionManagement((session)->session
                                              .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilter(jwtAuthFilter);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
       return http.build();
     }
