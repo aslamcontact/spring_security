@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +21,7 @@ public class AppUsers implements UserDetails{
 
     @Id
     private Integer id;
-    private String userName;
+    private String username;
 
 
     private String email;
@@ -41,7 +42,7 @@ public class AppUsers implements UserDetails{
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
     @Override
@@ -66,11 +67,11 @@ public class AppUsers implements UserDetails{
 
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getEmail() {
