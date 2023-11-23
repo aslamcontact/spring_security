@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      maxLifetime: 3000000
+      leakDetectionThreshold: 300000
+    username: aslam
+    password: aslam_pass
+    url: jdbc:mysql://10.2.0.3:3306/aslam_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
