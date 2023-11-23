@@ -3,8 +3,11 @@ package com.aslam.mycontact.springtest.security.jwt;
 import com.aslam.mycontact.springtest.dao.AppUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,13 +20,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class ApplicationConfig {
 
-    @Autowired
-    AppUserRepository appUserRepository;
+     @Autowired
+     AppUserRepository appUserRepository;
+
 
     @Bean
     public UserDetailsService userDetailsService()
     {
-        return username -> appUserRepository.findByUsername(username).orElseThrow(
+        return username -> appUserRepository.findByusername(username).orElseThrow(
                 ()->   new UsernameNotFoundException("user not found")
         )
                 ;
