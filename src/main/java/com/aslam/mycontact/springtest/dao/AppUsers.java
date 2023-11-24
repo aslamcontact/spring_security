@@ -1,9 +1,6 @@
 package com.aslam.mycontact.springtest.dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +17,8 @@ public class AppUsers implements UserDetails{
 
 
     @Id
+    @SequenceGenerator(name="seq_name",sequenceName="seq_name",allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seq_name")
     private Integer id;
     private String username;
 
